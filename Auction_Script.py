@@ -1,8 +1,15 @@
 import os
+from ASCII_ART import logo
+
+print(logo)
 
 player_list = []
 engine = True
-winner = {}
+winner = {
+    "Name": "",
+    "Bid": 0
+}
+
 
 def user_details(user_name, user_bid):
     player_details = {
@@ -14,8 +21,8 @@ def user_details(user_name, user_bid):
 
 while engine is True:
     name = input("What is your name?: ").lower()
-    bid = int(input("What is your name?: $"))
-    restart = input ("Are there any other bidders? Type 'yes or 'no'").lower()
+    bid = int(input("What is your bid?: $"))
+    restart = input("Are there any other bidders? Type 'yes or 'no'").lower()
     user_details(name, bid)
     if restart == "y" or restart == "yes":
         if os.name == 'nt':
@@ -23,10 +30,13 @@ while engine is True:
         else:
             os.system('clear')
     elif restart == "no" or restart == "n":
-        for key in range(player_list):
-            if player_list[key]["Bid"] > winner:
-                chosen = {
-                    player_list[key]
+        for key in range(len(player_list)):
+            if player_list[key]["Bid"] > winner["Bid"]:
+                winner = {
+                    "Name": player_list[key]["Name"],
+                    "Bid": player_list[key]["Bid"]
                 }
-                print(winner["Name"], winner["bid"])
-
+        engine = False
+User_name = winner["Name"]
+User_Bid = winner["Bid"]
+print(f"The winner is {User_name} with a bid of ${User_Bid}")
