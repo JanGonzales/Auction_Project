@@ -23,13 +23,13 @@ while engine is True:
     name = input("What is your name?: ").lower()
     bid = int(input("What is your bid?: $"))
     restart = input("Are there any other bidders? Type 'yes or 'no'").lower()
-    user_details(name, bid)
+    user_details(name, bid) ## winner[name] = price creates a dictionary much easier
     if restart == "y" or restart == "yes":
         if os.name == 'nt':
             os.system('cls')
         else:
             os.system('clear')
-    elif restart == "no" or restart == "n":
+    elif restart == "no" or restart == "n": #optimised and move if statement inside the function
         for key in range(len(player_list)):
             if player_list[key]["Bid"] > winner["Bid"]:
                 winner = {
@@ -38,5 +38,5 @@ while engine is True:
                 }
         engine = False
 User_name = winner["Name"]
-User_Bid = winner["Bid"]
+User_Bid = winner["Bid"] ## put inside function
 print(f"The winner is {User_name} with a bid of ${User_Bid}")
